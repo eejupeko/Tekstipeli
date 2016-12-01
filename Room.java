@@ -6,6 +6,7 @@ import java.util.List;
 public class Room {
 	private String text;
 	private List<roomDirection> allowedMoves = new ArrayList<roomDirection>();
+	private List<String> items = new ArrayList<String>();
 	
 	public Room(String text){
 		this.text = text;
@@ -28,6 +29,17 @@ public class Room {
 			}
 		}
 		return list.toArray(new String[0]);
+	}
+	
+	public void addItemToRoom(String item){
+		this.items.add(item);
+	}
+	
+	public boolean getItem(String item){
+		for (String s : this.items){
+			if (item.equals(s)) {items.remove(s); return true;}
+		}
+		return false;
 	}
 	
 	public String getText() { return this.text; }

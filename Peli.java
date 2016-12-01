@@ -5,18 +5,23 @@ import java.util.Scanner;
 public class Peli {
 
 	public static void main(String[] args) {
-		World w = new World();
+		World world = new World();
 		Scanner keyboard = new Scanner(System.in);
 		String command;
+		Parser p = new Parser();
 		while(true){
-			System.out.println(w.currentRoom().getText());
-			if (w.End()) break;
+			System.out.println(world.currentRoom().getText());
+			if (world.End()) break;
 			System.out.print('>');
+			
 			command = keyboard.nextLine();
-			if (!w.Next(command)) System.out.println("I didn't understand.");;
+			String[] data = p.parse(command);
+			
+			if (data == null) System.out.println("I didn't understand");
+			else System.out.print(world.doStuff(data));
+
 			System.out.println();			
 		}
 		keyboard.close();
 	}
-
 }
