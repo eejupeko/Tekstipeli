@@ -9,9 +9,8 @@ public class Peli {
 		Scanner keyboard = new Scanner(System.in);
 		String command;
 		Parser p = new Parser();
+		System.out.println(world.start());
 		while(true){
-			System.out.println(world.currentRoom().getText());
-			if (world.End()) break;
 			System.out.print('>');
 			
 			command = keyboard.nextLine();
@@ -20,7 +19,9 @@ public class Peli {
 			if (data == null) System.out.println("I didn't understand");
 			else System.out.print(world.doStuff(data));
 
-			System.out.println();			
+			System.out.println();		
+			System.out.println(world.currentRoom().getText());
+			if (world.end()) break;
 		}
 		keyboard.close();
 	}

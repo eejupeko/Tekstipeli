@@ -25,6 +25,7 @@ public class Parser {
 	
 	public String[] parse(String s){
 		this.words = s.split("\\s+");
+		if (words.length == 1 && (words[0].equals("quit") || words[0].equals("exit"))) { data[0] = "quit"; return data;}
 		for(int i=-1; i < this.words.length; i++){
 			if (L(i)) return data;
 		}

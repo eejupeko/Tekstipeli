@@ -5,8 +5,11 @@ import java.util.List;
 
 public class Room {
 	private String text;
+	private String altText;
 	private List<roomDirection> allowedMoves = new ArrayList<roomDirection>();
 	private List<String> items = new ArrayList<String>();
+	private String usableItem;
+	public boolean ending = false;
 	
 	public Room(String text){
 		this.text = text;
@@ -31,15 +34,35 @@ public class Room {
 		return list.toArray(new String[0]);
 	}
 	
-	public void addItemToRoom(String item){
+	public void addItemToRoom(String item, String str){
 		this.items.add(item);
+		this.altText = str;
+	}
+	
+	public void addUsableItem(String item, String str){
+		this.usableItem = item;
+		this.altText = str;
 	}
 	
 	public boolean getItem(String item){
 		for (String s : this.items){
-			if (item.equals(s)) {items.remove(s); return true;}
+			if (item.equals(s)) {items.remove(s); this.text = this.altText; return true;}
 		}
 		return false;
+	}
+	
+	public boolean useItem(String item){
+		if (this.usableItem == item){
+			this.usableItem = null;
+			this.text = this.altText;
+			return true;
+		}
+		return false;
+	}
+	
+	
+	public boolean end(){
+		return this.ending;
 	}
 	
 	public String getText() { return this.text; }
