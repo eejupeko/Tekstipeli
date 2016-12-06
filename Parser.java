@@ -24,8 +24,9 @@ public class Parser {
 	public Parser(){;}
 	
 	public String[] parse(String s){
-		this.words = s.split("\\s+");
-		if (words.length == 1 && (words[0].equals("quit") || words[0].equals("exit"))) { data[0] = "quit"; return data;}
+		this.words = s.toLowerCase().split("\\s+");
+		if (words.length == 1 && (words[0].equals("quit") || words[0].equals("exit") )) { data[0] = "quit"; return data;}
+		if (words.length == 1 && words[0].equals("help")) { data[0] = "help"; return data;};
 		for(int i=-1; i < this.words.length; i++){
 			if (L(i)) return data;
 		}
@@ -39,10 +40,15 @@ public class Parser {
 			case "get":
 				data[0] = "take";
 				return Vo(i+1);
+			case "pick":
+				data[0] = "take";
+				if (words[i+2].equals("up")) return Vo(i+2);
+				return Vo(i+1);
 			case "attack":
 			case "fight":
 			case "punch":
 			case "kick":
+			case "hit":
 				data[0] = "attack";
 				return Vo(i+1);
 			case "use":
@@ -50,8 +56,16 @@ public class Parser {
 				return Vo(i+1);
 			case "go":
 			case "walk":
+			case "run":
 				data[0] = "go";
 				return V(i+1);
+			case "open":
+				data[0] = "open";
+				return Vo(i+1);
+			case "press":
+			case "push":
+				data[0] = "press";
+				return Vo(i+1);
 			default:
 				break;
 		}
@@ -77,6 +91,10 @@ public class Parser {
 		switch(words[i+1]){
 			case "key":
 			case "card":
+			case "troll":
+			case "sword":
+			case "door":
+			case "button":
 				data[1] = words[i+1];
 				return true;
 			case "a":
@@ -108,6 +126,10 @@ public class Parser {
 		switch(words[i+1]){
 			case "key":
 			case "card":
+			case "troll":
+			case "sword":
+			case "door":
+			case "button":
 				data[1] = words[i+1];
 				return true;
 			default:
@@ -121,6 +143,8 @@ public class Parser {
 			case "forward":
 			case "forwards":
 			case "back":
+			case "backwards":
+			case "backward":
 			
 			case "up":
 			case "down":
@@ -131,6 +155,8 @@ public class Parser {
 			case "south":
 			case "east":
 			case "west":
+				
+			case "cave":
 				data[1] = words[i+1];
 				return true;
 			case "to":
@@ -147,6 +173,8 @@ public class Parser {
 			case "forward":
 			case "forwards":
 			case "back":
+			case "backwards":
+			case "backward":
 			
 			case "up":
 			case "down":
@@ -157,6 +185,8 @@ public class Parser {
 			case "south":
 			case "east":
 			case "west":
+				
+			case "cave":
 				data[1] = words[i+1];
 				return true;
 			default:
