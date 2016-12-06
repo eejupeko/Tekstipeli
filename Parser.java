@@ -12,7 +12,7 @@ package peli;
  *  Ad -> red | big | ...
  *  O -> key | card | letter | ...
  *  V -> go | walk | run ...
- *  T -> to | to the
+ *  T -> to | to the | in | in the
  *  Od -> left | right | forward | ...
  *  Oe -> left | right | forward | ...
  */
@@ -160,6 +160,7 @@ public class Parser {
 				data[1] = words[i+1];
 				return true;
 			case "to":
+			case "in":
 				if (words[i+2].equals("the")) return T(i+2);
 				return T(i+1);
 			default:

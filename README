@@ -1,0 +1,38 @@
+Tekstipeli
+Tekijä: Eetu Korhonen
+
+Ohjelman kääntämistä varten tietokoneella pitää olla asennettuna Java SDK.
+
+Ohjeet kääntämiseen:
+1. Pura zip-tiedoston kaikki tiedostot samaan kansioon.
+2. Selaa komentorivillä kansioon, johon purit tiedostot.
+3. Käännä ohjelma komennolla: javac -d .\peli *.java
+4. Aja peli komennolla: java -cp ./peli;. peli.Peli
+
+Läpipeluu ohje:
+> go north
+> take the sword
+> go back
+> go right
+> attack the troll
+> open the door
+> press the button
+
+Maailmassa liikkuminen on tehty äärellisellä automaatilla. Maailma on jaettu huoneisiin ja 
+jokaisella huoneella on tiedossa millä sanoilla siirrytään ja mihin huoneeseen. Huoneet luodaan
+maailman alustuksessa. Pelilogiikka oli suunniteltu tätä silmälläpitäen ja tämän alkuperäisen
+suunnitelman päälle lisätyt tavaroiden käsittely ja tappelut monimutkaistivat alkuperäistä
+suunnitelmaa. Huoneen luontivaiheessa pitää kertoa onko huoneessa tavaroita joita voidaan poimia
+ja mikä huoneen kuvaus on, kun tavara on poimittu. Samoin pitää kertoa voiko huoneessa tapella
+ja mikä on huoneen kuvaus tappelun jälkeen, jos voitti tai jos hävisi. Tappelun voi hävitä,
+jos ei ole poiminut asetta, joka tarvitaan tappelun voittamiseen.
+
+Syötteenkäsittely on tehty kontekstittomalla kieliopilla, jonka idea on kirjoitettu kommenttina
+parser luokan lähdekoodiin. Samalla, kun ohjelma tarkastelee onko annettu merkkijono mielekäs, se
+poimii pelilogiikalle mielenkiintoiset sanat esim. "go" tai "take" ja "right" tai "key". Ohjelman
+lukee sana kerrallaan merkkijonoa alusta, kunnes tulee ensimmäiseen sanan, joka voi aloittaa 
+sallitun syötteen. Tästä eteenpäin ohjelma tutkii syntyykö tätä sanaa seuraavista sanoista sallittu
+syöte, jos ei siirrytään tutkimaan seuraavaa sanaa. Jos syntyi sallittu syöte, niin lopetetaan 
+syötteen luku ja palautetaan pelilogiikalle poimitut sanat. Jos syötteessä on useampia komentoja, 
+esim. "go forward and take the key", ohjelma poimii vain ensimmäisen komennon, eli "go forward" ja 
+palauttaa siitä poimitut tiedot.

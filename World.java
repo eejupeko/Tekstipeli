@@ -64,7 +64,7 @@ public class World {
 		
 		
 		
-		pathRight.isAttackable("You killed the troll using your sword", "The troll killed you", 
+		pathRight.isAttackable("You killed the troll using your sword \r\n", "The troll killed you \r\n", 
 								"There's a door in front of you that the troll was guarding and a path to the left where you came from.", 
 								"sword", new String[]{"door"}, trollDoor);
 		
@@ -110,7 +110,7 @@ public class World {
 				}
 				break;
 			case "open":
-				if (next(data[1])) return "You opened the door and went in";
+				if (next(data[1])) return "You opened the door and went in \r\n";
 				break;
 			case "quit":
 				Room r = new Room("");
